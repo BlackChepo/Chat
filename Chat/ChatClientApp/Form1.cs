@@ -15,5 +15,13 @@ namespace ChatClientApp
         {
             InitializeComponent();
         }
+        protected override void OnLoad(EventArgs e)
+        {
+            String MyGuid1 = System.Guid.NewGuid().ToString();
+            String MyGuid2 = System.Guid.NewGuid().ToString();
+            String MyGuid3 = System.Guid.NewGuid().ToString();
+            String MyGuid4 = System.Guid.NewGuid().ToString();
+            MessageBox.Show(MyGuid1 + Environment.NewLine + MyGuid2 + Environment.NewLine + MyGuid3 + Environment.NewLine + MyGuid4);
+        }
     }
 }
