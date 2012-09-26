@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using ChatServer;
 using System.Net;
+using System.Xml.Serialization;
+using System.IO;
 
 namespace ChatServerApp
 {
@@ -16,14 +18,42 @@ namespace ChatServerApp
             //var manager = new Manager();
             //manager.Start();
 
+            //WriteXML();
+            //return;
+
             Manager manager = new Manager();
             manager.Start();
         }
 
-        static void Server_meinevent(object sender, EventArgs e)
+        
+
+        public static void WriteXML()
         {
-            
+            Book overview = new Book();
+            overview.title = "Serialization Overview";
+
+            SerializeToString(overview);
+
+            Console.ReadLine();
         }
+
+
+        public static void SerializeToString(object obj)
+        {
+            XmlSerializer serializer = new XmlSerializer(obj.GetType());
+
+            using (StringWriter writer = new StringWriter())
+            {
+                serializer.Serialize(writer, obj);
+                
+                Console.WriteLine(writer.ToString());
+            }
+        }
+    }
+
+    public class Book
+    {
+        public String title;
 
     }
 }

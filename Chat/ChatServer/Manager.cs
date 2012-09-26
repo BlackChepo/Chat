@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.ComponentModel;
 using System.Net;
+using ChatBibliothek;
 
 namespace ChatServer
 {
@@ -29,7 +30,7 @@ namespace ChatServer
         #region Konstruktor
         public Manager(int plätze = 20)
         {
-            this.Plätze = plätze;            
+            this.Plätze = plätze;
         }
         #endregion
         #region Öffentliche Funktionen
