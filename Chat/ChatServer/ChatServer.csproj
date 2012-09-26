@@ -44,7 +44,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Klassen\ClientStream.cs" />
     <Compile Include="Entity Framework\ChatEntities.cs" />
+    <Compile Include="Klassen\HauptClientStream.cs" />
+    <Compile Include="Schnittstellen\IClientStream.cs" />
     <Compile Include="Klassen\Client.cs" />
     <Compile Include="Klassen\ClientBenutzer.cs" />
     <Compile Include="Schnittstellen\IBenutzer.cs" />
@@ -59,7 +62,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ChatTable.sql" />
+    <Content Include="SQL\ChatTable.sql" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="ServerModel.edmx">

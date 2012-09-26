@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Net;
+using System.Net.Sockets;
 
 namespace ChatServer
 {
     public class ClientBenutzer : Client, IBenutzer
-    {
+    {        
         public Benutzer Benutzer { get; private set; }
 
-        public ClientBenutzer(IPAddress ipAdresse, Benutzer benutzer)
-            : base(ipAdresse)
+        public ClientBenutzer(TcpClient tcpClient)
+            : base(tcpClient)
         {
-            Benutzer = benutzer;
-        }
+            // Checks = ist OK passwort stimmt.
+            this.ClientStreams.FirstOrDefault(p => p is HauptClientStream).SendeZuClient("OK, Du bist was du bist.");
+            
+        }   
     }
 }

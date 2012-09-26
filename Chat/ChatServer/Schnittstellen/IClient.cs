@@ -10,5 +10,6 @@ namespace ChatServer
     {
         IPAddress IPAdresse { get; set; }
         Guid GUID { get; set; }
+        List<IClientStream> ClientStreams { get; set; }
     }
 }
