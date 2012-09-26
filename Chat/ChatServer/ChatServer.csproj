@@ -62,7 +62,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="SQL\ChatTable.sql" />
+    <Content Include="ChatTable.sql" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="ServerModel.edmx">

@@ -13,6 +13,12 @@ namespace ChatServer
     /// </summary>
     public abstract class Client : IClient
     {
+        #region Variablen
+        private bool TrennungsVorgang = false;
+        delegate void ClientHandler(IClient client);
+        event ClientHandler VerbindungGetrennt;
+        object sperre = new Object();
+        #endregion
         #region Eigenschaften
         /// <summary>
         /// IP Adresse des Clients
@@ -30,15 +36,27 @@ namespace ChatServer
             GUID = Guid.NewGuid();
             IPAdresse = ((IPEndPoint)tcpClient.Client.RemoteEndPoint).Address;
             ClientStreams = new List<IClientStream>();
+            
             var hauptStream = new HauptClientStream(tcpClient);
-            hauptStream.StreamTrennung += new EventHandler(hauptStream_StreamGetrennt);
+            hauptStream.StreamTrennung += new EventHandler(StreamGetrenntEvent);
             ClientStreams.Add(hauptStream);
         }
         #endregion        
         #region Events
-        private void hauptStream_StreamGetrennt(object sender, EventArgs e)
+        private void StreamGetrenntEvent(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            lock (sperre)
+            {
+                if (TrennungsVorgang)
+                return;
+
+                TrennungsVorgang = true;
+                ClientStreams.ForEach(p => p.StreamTrennung -= StreamGetrenntEvent);
+                ClientStreams.ForEach(p => p.Stream.Close());
+
+                if (VerbindungGetrennt != null)
+                    VerbindungGetrennt(this);
+            }
         }
         #endregion
     }

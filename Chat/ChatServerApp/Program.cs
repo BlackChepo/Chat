@@ -16,8 +16,13 @@ namespace ChatServerApp
             //var manager = new Manager();
             //manager.Start();
 
-            var Server = new Server(IPAddress.Any, 3000);
-
+            var Server = new Server(IPAddress.Any, 3000);            
         }
+
+        static void Server_meinevent(object sender, EventArgs e)
+        {
+            
+        }
+
     }
 }

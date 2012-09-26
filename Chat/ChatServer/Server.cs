@@ -10,32 +10,11 @@ namespace ChatServer
 {
     public class Server
     {
-        //#region Eigenschaften
-        //public IPAddress IPAdresse { get; private set; }
-        //public int Port { get; private set; }
-        //#endregion
-        //#region Konstruktor
-        //public Server(IPAddress ipAdresse, int port)
-        //{
-        //    IPAddress ip = IPAddress.Any;
-
-        //    if (ipAdresse != null)
-        //        ip = ipAdresse;
-
-        //    if (!(port > 0 && port <= 65535))
-        //        throw new ArgumentOutOfRangeException("Kein Gültiger Port");
-            
-        //    IPAdresse = ip;
-        //    Port = port;
-        //}
-        //#endregion
-
-
-        //.... Trennung
-
         #region Variablen
         private TcpListener listener;
-        private Thread listenThread;                    
+        private Thread listenThread;
+        public delegate void ClientHandler(IClient client);   
+        public event ClientHandler NeuerClient;
         #endregion
         #region properties
         public IPAddress IPAdresse { get; private set; }
@@ -44,7 +23,7 @@ namespace ChatServer
         #endregion
         #region Konstruktor
         public Server(IPAddress ipAdresse, int port)
-        {
+        {     
             IPAddress ip = IPAddress.Any;
 
             if (ipAdresse != null)
@@ -74,23 +53,20 @@ namespace ChatServer
                 {
                     TcpClient client = this.listener.AcceptTcpClient();                    
                     var clientBenutzer = new ClientBenutzer(client);
-                    
-                    //Thread clientThread = new Thread(new ParameterizedThreadStart(HandleClientComm));                    
 
-                    //clientThread.Start(client);
+                    if (NeuerClient != null)
+                        NeuerClient(clientBenutzer);
                 }
                 catch (SocketException se)
                 {
                     if (Working)
                     {
                         throw se;
-                    }
-                   
-                
+                    }                   
                 }
             }
         }
-
+        
         private void HandleClientComm(object client)
         {
             Thread runningThread = Thread.CurrentThread;
