@@ -44,17 +44,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Klassen\ClientStream.cs" />
+    <Compile Include="Klassen\HauptServer.cs" />
     <Compile Include="Entity Framework\ChatEntities.cs" />
     <Compile Include="Klassen\HauptClientStream.cs" />
-    <Compile Include="Schnittstellen\IClientStream.cs" />
     <Compile Include="Klassen\Client.cs" />
     <Compile Include="Klassen\ClientBenutzer.cs" />
     <Compile Include="Schnittstellen\IBenutzer.cs" />
     <Compile Include="Schnittstellen\IClient.cs" />
     <Compile Include="Manager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Server.cs" />
+    <Compile Include="Klassen\Server.cs" />
     <Compile Include="ServerModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -73,7 +72,12 @@
   <ItemGroup>
     <None Include="App.Config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\ChatBibliothek\ChatBibliothek.csproj">
+      <Project>{878CFDAB-0F3D-4F20-ABE8-D133C415ADB4}</Project>
+      <Name>ChatBibliothek</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

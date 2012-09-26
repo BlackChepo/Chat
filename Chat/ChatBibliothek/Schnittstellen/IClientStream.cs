@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Net.Sockets;
 
-namespace ChatServer
+namespace ChatBibliothek
 {
     public interface IClientStream
     {
@@ -13,6 +13,6 @@ namespace ChatServer
         TcpClient tcpClient { get; set; }
         NetworkStream Stream { get; set; }
 
-        void SendeZuClient(string nachricht);
+        void Sende(string nachricht);
     }
 }

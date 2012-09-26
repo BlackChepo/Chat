@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Net.Sockets;
+using ChatBibliothek;
 
 namespace ChatServer
 {
@@ -14,7 +15,7 @@ namespace ChatServer
             
         }
 
-        internal override void HöreStreamAb()
+        public override void HöreStreamAb()
         {
             byte[] message = new byte[4096];
             int bytesRead;

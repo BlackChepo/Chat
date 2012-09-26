@@ -15,8 +15,7 @@ namespace ChatServer
             : base(tcpClient)
         {
             // Checks = ist OK passwort stimmt.
-            this.ClientStreams.FirstOrDefault(p => p is HauptClientStream).SendeZuClient("OK, Du bist was du bist.");
-            
+            this.ClientStreams.FirstOrDefault(p => p is HauptClientStream).Sende("OK, Du bist was du bist.");            
         }   
     }
 }

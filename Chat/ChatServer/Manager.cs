@@ -7,10 +7,15 @@ using System.Net;
 
 namespace ChatServer
 {
-    public class Manager
+    public sealed class Manager
     {
+        #region Static Config
+        public static readonly int HauptServerPort = 3000;
+        public static readonly int ChatServerPort = 3001;
+        public static readonly int FileServerPort = 3002;
+        #endregion
         #region Variablen
-        internal DateTime _ServerStart;        
+        private HauptServer HauptServer;        
         #endregion
         #region Eigenschaften
         public int Plätze { get; private set; }
@@ -18,35 +23,32 @@ namespace ChatServer
         /// Gibt an, ob der Server läuft.        
         /// </summary>
         [DefaultValue(false)]
-        public bool ServerArbeitsStatus { get; internal set; }
+        public bool ServerArbeitsStatus { get; private set; }
+        public List<IClient> Clients { get; private set; }
         #endregion
         #region Konstruktor
         public Manager(int plätze = 20)
         {
-            this.Plätze = plätze;
+            this.Plätze = plätze;            
         }
         #endregion
         #region Öffentliche Funktionen
         public void Start()
         {
             ServerArbeitsStatus = true;
-            OnStart();
+            StarteServer();            
         }        
         public void Stop()
         {
-            ServerArbeitsStatus = false;
-            OnStop();
+            ServerArbeitsStatus = false;            
         }        
         #endregion
         #region Private Funktionen
-        internal virtual void OnStop()
+        private void StarteServer()
         {
-
-        }
-        internal virtual void OnStart()
-        {
-            var server = new Server(IPAddress.Any,3000);
-        }
+            if (HauptServer == null)
+                HauptServer = new HauptServer(IPAddress.Any, HauptServerPort);         
+        }        
         #endregion        
     }
 }

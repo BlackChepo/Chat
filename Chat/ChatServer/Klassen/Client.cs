@@ -5,6 +5,7 @@ using System.Text;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
+using ChatBibliothek;
 
 namespace ChatServer
 {
@@ -15,8 +16,8 @@ namespace ChatServer
     {
         #region Variablen
         private bool TrennungsVorgang = false;
-        delegate void ClientHandler(IClient client);
-        event ClientHandler VerbindungGetrennt;
+        public delegate void ClientHandler(IClient client);
+        public event ClientHandler VerbindungGetrennt;
         object sperre = new Object();
         #endregion
         #region Eigenschaften

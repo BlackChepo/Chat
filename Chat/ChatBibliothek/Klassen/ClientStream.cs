@@ -5,7 +5,7 @@ using System.Text;
 using System.Net.Sockets;
 using System.Threading;
 
-namespace ChatServer
+namespace ChatBibliothek
 {
     public abstract class ClientStream : IClientStream
     {        
@@ -25,7 +25,7 @@ namespace ChatServer
             t.Start();
         }
 
-        public void SendeZuClient(string nachricht)
+        public void Sende(string nachricht)
         {   
             if (Stream == null)
                 return;
@@ -41,12 +41,12 @@ namespace ChatServer
             t.Start();
         }
 
-        internal virtual void HöreStreamAb()
+        public virtual void HöreStreamAb()
         {
             throw new NotImplementedException("Höre Stream Ab nicht implementiert.");
         }
 
-        internal void StreamGetrennt()
+        public void StreamGetrennt()
         {
             if (StreamTrennung != null)
                 StreamTrennung(this, null);
